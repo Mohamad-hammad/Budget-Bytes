@@ -1,8 +1,9 @@
 import customtkinter
 import os
 from PIL import Image
-from Dashboard import *
 
+from Dashboard import *
+from TransactionsHistory import *
 from Expenses import*
 class App(customtkinter.CTk):
     def __init__(self):
@@ -15,7 +16,7 @@ class App(customtkinter.CTk):
         self.grid_columnconfigure(1, weight=1)
 
         # load images with light and dark mode image
-        image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "test_images")
+        image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "images")
         self.logo_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "CustomTkinter_logo_single.png")),
                                                  size=(26, 26))
         self.large_test_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "large_test_image.png")),
@@ -68,7 +69,7 @@ class App(customtkinter.CTk):
         self.frame_2_button.grid(row=2, column=0, sticky="ew")
 
         self.frame_3_button = customtkinter.CTkButton(self.navigation_frame, corner_radius=0, height=40,
-                                                      border_spacing=10, text="All Accounts",
+                                                      border_spacing=10, text="All Transactions",
                                                       fg_color="transparent", text_color=("gray10", "gray90"),
                                                       hover_color=("gray70", "gray30"),
                                                       image=self.all_accounts, anchor="w",
@@ -94,12 +95,14 @@ class App(customtkinter.CTk):
         self.second_frame = create_expenses_frame(self)
 
         # create third frame
+        self.third_frame = create_transactions_history_frame(self)
+        """
         self.third_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
         self.navigation_frame_label = customtkinter.CTkLabel(self.third_frame, text="This is third frame",
                                                              compound="left",
                                                              font=customtkinter.CTkFont(size=15, weight="bold"))
         self.navigation_frame_label.grid(row=0, column=0, padx=20, pady=20)
-
+        """
         # select default frame
         self.select_frame_by_name("home")
 

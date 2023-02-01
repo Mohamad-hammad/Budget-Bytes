@@ -183,5 +183,5 @@ def create_expenses_frame(Root):
     month_select_menu = customtkinter.CTkOptionMenu(master=expenses_frame, values=get_names_of_all_months(),
                                                        command=select_month_event)
     month_select_menu.grid(row=0, column=0, padx=20, sticky="nw")
-
+    print("expense frame bg is "+root["bg"])
     return expenses_frame

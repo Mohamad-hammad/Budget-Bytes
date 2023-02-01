@@ -137,6 +137,7 @@ class App(customtkinter.CTk):
 
     def change_appearance_mode_event(self, new_appearance_mode):
         customtkinter.set_appearance_mode(new_appearance_mode)
+        print(customtkinter.get_appearance_mode())
 
 
 if __name__ == "__main__":

@@ -35,7 +35,15 @@ def show_all_transactions():
 
     all_transactions_frame = customtkinter.CTkFrame(root, corner_radius=0, fg_color="transparent")
     # Create A Canvas
-    my_canvas = tkinter.Canvas(all_transactions_frame,bg=root["bg"],bd=0, highlightthickness=0,width=900,height=500)
+    if customtkinter.get_appearance_mode()=='Light':
+        print("setting it to white")
+        bg='#f0ecec'
+    else:
+        bg = root["bg"]
+    print("root bg is "+root["bg"])
+    print("appearance mode is "+customtkinter.get_appearance_mode())
+
+    my_canvas = tkinter.Canvas(all_transactions_frame,bg=bg,bd=0, highlightthickness=0,width=900,height=500)
     my_canvas.grid(row=1, column=0)
 
     # Add A Scrollbar To The Canvas

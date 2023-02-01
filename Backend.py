@@ -7,7 +7,7 @@ from datetime import date
 import datetime
 import pandas as pd
 
-excel_data = pd.read_excel("F:/Downloads/BudgetBytes_sample_data.xlsx", header=0)
+excel_data = pd.read_excel("BudgetBytes_sample_data.xlsx", header=0)
 excel_data.fillna("False", inplace=True)
 
 AllTransactions = []
@@ -51,9 +51,12 @@ def printData():
         i.printTransaction()
         print("------------------\n")
 
-def addlabels(x,y):
+
+def addlabels(x, y):
     for i in range(len(x)):
-        plt.text(i, y[i]//2, y[i], ha = 'center')
+        plt.text(i, y[i] // 2, y[i], ha='center')
+
+
 def drawBarChart():
     totalAmountPerMonth = []
     allMonths = []
@@ -96,7 +99,7 @@ def drawBarChart():
 
     rects1 = ax.bar(allMonths, data, width, label=allMonths, color=colors)
     for i in range(len(allMonths)):
-        ax.text(i,data[i], f"{round(data[i]):,}", ha='center',weight='bold')
+        ax.text(i, data[i], f"{round(data[i]):,}", ha='center', weight='bold')
         ax.text
 
     ax.set_facecolor("black")
@@ -154,7 +157,6 @@ def totalLoanToBePaid():
     for i in AllTransactions:
         tagslist = i.tags[0].split(",")
         if "loan to be payed" in tagslist:
-
             totalLoan = totalLoan + i.amount
     return round(totalLoan)
 
@@ -167,16 +169,18 @@ def totalLoanToRecieve():
             totalLoan = totalLoan + i.amount
     return round(totalLoan)
 
+
 def get_names_of_all_months():
-    all_months_names=[]
+    all_months_names = []
     for i in AllTransactions:
         date = i.date.split(" ");
         thismonth = date[1]
         all_months_names.append(thismonth)
-    all_months_names=list(dict.fromkeys(all_months_names))
+    all_months_names = list(dict.fromkeys(all_months_names))
     all_months_names = all_months_names[-12:]
     return all_months_names
 
+
 def get_percentage(part, whole):
     percentage = 100 * float(part) / float(whole)
-    return percentage/100
+    return percentage / 100

@@ -1,18 +1,20 @@
 import tkinter
 from tkinter import LEFT, BOTH, VERTICAL, Y, RIGHT, ttk
 
-from Expenses import*
+from Expenses import *
+
 root = None
 transaction_history_month = None
-def show_all_transactions():
 
+
+def show_all_transactions():
     all_transactions_frame = customtkinter.CTkFrame(root, corner_radius=0, fg_color="transparent")
     # Create A Canvas
-    if customtkinter.get_appearance_mode()=='Light':
-        bg='#f0ecec'
+    if customtkinter.get_appearance_mode() == 'Light':
+        bg = '#f0ecec'
     else:
         bg = root["bg"]
-    my_canvas = tkinter.Canvas(all_transactions_frame,bg=bg,bd=0, highlightthickness=0,width=900,height=500)
+    my_canvas = tkinter.Canvas(all_transactions_frame, bg=bg, bd=0, highlightthickness=0, width=900, height=500)
     my_canvas.grid(row=1, column=0)
 
     # Add A Scrollbar To The Canvas
@@ -32,52 +34,52 @@ def show_all_transactions():
 
     i = 0
     this_month_transactions = get_current_month_transactions_history()
-    #transaction attributes row
+    # transaction attributes row
 
     temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
                                         text="Date",
-                                        compound="left", wraplength=100, justify="left",text_color="#395B64",
+                                        compound="left", wraplength=100, justify="left", text_color="#395B64",
                                         font=customtkinter.CTkFont(size=15, weight="bold"))
-    temp_label.grid(row=i, column=0, columnspan = 6,padx=20, pady=20, sticky='nw')
+    temp_label.grid(row=i, column=0, columnspan=6, padx=20, pady=20, sticky='nw')
 
     temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
                                         text="Description",
-                                        compound="left", wraplength=100, justify="left",text_color="#395B64",
+                                        compound="left", wraplength=100, justify="left", text_color="#395B64",
                                         font=customtkinter.CTkFont(size=15, weight="bold"))
     temp_label.grid(row=i, column=1, padx=20, pady=20, sticky='nw')
 
     temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
                                         text="Type",
-                                        compound="left", wraplength=100, justify="left",text_color="#395B64",
+                                        compound="left", wraplength=100, justify="left", text_color="#395B64",
                                         font=customtkinter.CTkFont(size=15, weight="bold"))
     temp_label.grid(row=i, column=2, padx=20, pady=20, sticky='nw')
 
     temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
                                         text="Amount",
-                                        compound="left", wraplength=100, justify="left",text_color="#395B64",
+                                        compound="left", wraplength=100, justify="left", text_color="#395B64",
                                         font=customtkinter.CTkFont(size=15, weight="bold"))
     temp_label.grid(row=i, column=3, padx=20, pady=20, sticky='nw')
 
     temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
                                         text="Comments",
-                                        compound="left", wraplength=100, justify="left",text_color="#395B64",
+                                        compound="left", wraplength=100, justify="left", text_color="#395B64",
                                         font=customtkinter.CTkFont(size=15, weight="bold"))
     temp_label.grid(row=i, column=4, padx=20, pady=20, sticky='nw')
 
     temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
                                         text="Tags",
-                                        compound="left", wraplength=100, justify="left",text_color="#395B64",
+                                        compound="left", wraplength=100, justify="left", text_color="#395B64",
                                         font=customtkinter.CTkFont(size=15, weight="bold"))
     temp_label.grid(row=i, column=5, padx=20, pady=20, sticky='nw')
 
     temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
                                         text="Bank",
-                                        compound="left", wraplength=100, justify="left",text_color="#395B64",
+                                        compound="left", wraplength=100, justify="left", text_color="#395B64",
                                         font=customtkinter.CTkFont(size=15, weight="bold"))
     temp_label.grid(row=i, column=6, padx=20, pady=20, sticky='nw')
-    i=1
+    i = 1
     for transaction in this_month_transactions:
-        #transaction details
+        # transaction details
         temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
                                             text=transaction.date,
                                             compound="left", wraplength=100, justify="left",
@@ -120,7 +122,8 @@ def show_all_transactions():
                                             font=customtkinter.CTkFont(size=15, weight="bold"))
         temp_label.grid(row=i, column=6, padx=20, pady=20, sticky='nw')
         i = i + 1
-    all_transactions_frame.grid(row=1,column=0)
+    all_transactions_frame.grid(row=1, column=0)
+
 
 def set_month_event(month):
     global transaction_history_month
@@ -148,6 +151,7 @@ def get_current_month_transactions_history():
         i = i - 1
     this_month_transactions.reverse()
     return this_month_transactions
+
 
 def create_transactions_history_frame(Root):
     global root

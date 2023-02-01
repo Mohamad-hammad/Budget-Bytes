@@ -28,13 +28,13 @@ def createDashboardFrame(root):
     label_balance.grid(row=0, column=0, padx=20, sticky="nw")
 
     # total balance
-    if ( round(AllTransactions[len(AllTransactions) - 1].availableBalance) < 0):
+    if (round(AllTransactions[len(AllTransactions) - 1].availableBalance) < 0):
         color = "red"
     else:
         color = "green"
     font_totalBalance = customtkinter.CTkFont(family="Poppins Bold", size=25)
     label_totalBalance = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(
-        round(AllTransactions[len(AllTransactions) - 1].availableBalance)),text_color=color,
+        round(AllTransactions[len(AllTransactions) - 1].availableBalance)), text_color=color,
                                                 font=font_totalBalance)
     label_totalBalance.grid(row=0, column=0, padx=20, pady=20, sticky="nw")
 
@@ -119,7 +119,7 @@ def createDashboardFrame(root):
 
     # progess bar
     progressbar = customtkinter.CTkProgressBar(master=home_frame)
-    progressbar.set(get_percentage(currentMonthEarning(),getMonthlyExpenseLimit()))
+    progressbar.set(get_percentage(currentMonthEarning(), getMonthlyExpenseLimit()))
     progressbar.grid(row=4, column=1, pady=40, sticky="nw")
 
     # SPENT label

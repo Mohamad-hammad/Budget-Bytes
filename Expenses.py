@@ -52,7 +52,7 @@ def create_expense_bar_chart():
 
     ind = numpy.arange(8)  # the x locations for the groups
     width = .5
-    rects1 = ax.bar(list(expenses.keys()), data, width, label=list(expenses.keys()),color="#A5C9CA")
+    rects1 = ax.bar(list(expenses.keys()), data, width, label=list(expenses.keys()), color="#A5C9CA")
     for i in range(len(list(expenses.keys()))):
         ax.text(i, data[i], f"{round(data[i]):,}", ha='center', weight='bold')
         ax.text
@@ -60,6 +60,8 @@ def create_expense_bar_chart():
     ax.set_facecolor("black")
 
     return f;
+
+
 def this_month_total_earning():
     this_month_transactions = get_current_month_transactions()
     total_earning = 0
@@ -67,6 +69,8 @@ def this_month_total_earning():
         if i.type == 'Credit':
             total_earning = total_earning + i.amount;
     return round(total_earning)
+
+
 def this_month_total_expenses():
     this_month_transactions = get_current_month_transactions()
     total_expense = 0
@@ -75,6 +79,8 @@ def this_month_total_expenses():
             total_expense = total_expense + i.amount;
 
     return round(total_expense)
+
+
 def you_sepnt_most_on():
     this_month_transactions = get_current_month_transactions()
 
@@ -92,39 +98,45 @@ def you_sepnt_most_on():
     else:
         return None
 
+
 def create_current_month_expenses_frame():
     current_month_frame = customtkinter.CTkFrame(root, corner_radius=0, fg_color="transparent")
-    #adding bar chart
+    # adding bar chart
     if create_expense_bar_chart() != None:
         canvas = FigureCanvasTkAgg(create_expense_bar_chart(), master=current_month_frame)
         canvas.draw()
         canvas.get_tk_widget().grid(row=2, column=0, columnspan=1, padx=20, sticky="nw")
 
-    if you_sepnt_most_on()!=None:
+    if you_sepnt_most_on() != None:
         font_you_spent_most_on = customtkinter.CTkFont(family="Poppins Bold", size=20)
-        max_expense = customtkinter.CTkLabel(master=current_month_frame,font=font_you_spent_most_on, text="You spent most on \""+you_sepnt_most_on()+"\".")
-        max_expense.grid(row=3, column=0, pady=25,padx=20,sticky="nw")
+        max_expense = customtkinter.CTkLabel(master=current_month_frame, font=font_you_spent_most_on,
+                                             text="You spent most on \"" + you_sepnt_most_on() + "\".")
+        max_expense.grid(row=3, column=0, pady=25, padx=20, sticky="nw")
     else:
         font_you_spent_most_on = customtkinter.CTkFont(family="Poppins Bold", size=20)
-        max_expense = customtkinter.CTkLabel(master=current_month_frame,font=font_you_spent_most_on,
+        max_expense = customtkinter.CTkLabel(master=current_month_frame, font=font_you_spent_most_on,
                                              text="You didn't spend at all this month.")
-        max_expense.grid(row=3, column=0, pady=25,padx=20,sticky="nw")
+        max_expense.grid(row=3, column=0, pady=25, padx=20, sticky="nw")
 
     # Cash flow for december label
     font_cashflowLabel = customtkinter.CTkFont(family="Poppins Regular", size=15)
-    label_cashflowLabe = customtkinter.CTkLabel(master=current_month_frame, text="Cash flow for " + datetime.datetime.strptime(selected_month, '%b').strftime('%B'),
+    label_cashflowLabe = customtkinter.CTkLabel(master=current_month_frame,
+                                                text="Cash flow for " + datetime.datetime.strptime(selected_month,
+                                                                                                   '%b').strftime('%B'),
                                                 anchor="w",
                                                 font=font_cashflowLabel)
     label_cashflowLabe.grid(row=4, column=0, sticky="nw")
 
     # Earned label
     font_earnedLabel = customtkinter.CTkFont(family="Poppins Regular", size=10)
-    label_earnedLabel = customtkinter.CTkLabel(master=current_month_frame, text="EARNED", anchor="w", font=font_earnedLabel)
+    label_earnedLabel = customtkinter.CTkLabel(master=current_month_frame, text="EARNED", anchor="w",
+                                               font=font_earnedLabel)
     label_earnedLabel.grid(row=4, column=0, pady=20, sticky="nw")
 
     # Earned amount label
     font_amountEarned = customtkinter.CTkFont(family="Poppins Bold", size=10)
-    label_amountEarned = customtkinter.CTkLabel(master=current_month_frame, text="Rs." + str(this_month_total_earning()),
+    label_amountEarned = customtkinter.CTkLabel(master=current_month_frame,
+                                                text="Rs." + str(this_month_total_earning()),
                                                 anchor="w",
                                                 font=font_amountEarned)
     label_amountEarned.grid(row=4, column=0, padx=150, pady=20, sticky="nw")
@@ -136,12 +148,14 @@ def create_current_month_expenses_frame():
 
     # SPENT label
     font_spentLabel = customtkinter.CTkFont(family="Poppins Regular", size=10)
-    label_spentLabel = customtkinter.CTkLabel(master=current_month_frame, text="SPENT", anchor="w", font=font_spentLabel)
+    label_spentLabel = customtkinter.CTkLabel(master=current_month_frame, text="SPENT", anchor="w",
+                                              font=font_spentLabel)
     label_spentLabel.grid(row=4, column=0, pady=60, sticky="nw")
 
     # SPENT amount label
     font_spentAmount = customtkinter.CTkFont(family="Poppins Bold", size=10)
-    label_spentAmount = customtkinter.CTkLabel(master=current_month_frame, text="Rs." + str(this_month_total_expenses()),
+    label_spentAmount = customtkinter.CTkLabel(master=current_month_frame,
+                                               text="Rs." + str(this_month_total_expenses()),
                                                anchor="w",
                                                font=font_spentAmount)
     label_spentAmount.grid(row=4, column=0, padx=150, pady=60, sticky="nw")
@@ -158,7 +172,8 @@ def create_current_month_expenses_frame():
     else:
         color = "green"
     label_remainingAmount = customtkinter.CTkLabel(master=current_month_frame, text_color=color,
-                                                   text="Rs." + str(this_month_total_earning() - this_month_total_expenses()),
+                                                   text="Rs." + str(
+                                                       this_month_total_earning() - this_month_total_expenses()),
                                                    anchor="w", font=font_remainingAmount)
     label_remainingAmount.grid(row=4, column=0, padx=210, pady=45, sticky="nw")
 
@@ -168,7 +183,7 @@ def create_current_month_expenses_frame():
                                              font=font_remainingLabel)
     label_remaining.grid(row=4, column=0, pady=70, padx=210, sticky="nw")
 
-    current_month_frame.grid(row=1, column=0,pady=20,padx=20, sticky="nsew")
+    current_month_frame.grid(row=1, column=0, pady=20, padx=20, sticky="nsew")
 
 
 def select_month_event(month):
@@ -182,6 +197,6 @@ def create_expenses_frame(Root):
     expenses_frame = customtkinter.CTkFrame(Root, corner_radius=0, fg_color="transparent")
     root = expenses_frame
     month_select_menu = customtkinter.CTkOptionMenu(master=expenses_frame, values=get_names_of_all_months(),
-                                                       command=select_month_event)
+                                                    command=select_month_event)
     month_select_menu.grid(row=0, column=0, padx=20, sticky="nw")
     return expenses_frame

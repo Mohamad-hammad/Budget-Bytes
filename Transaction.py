@@ -33,7 +33,6 @@ class Transaction:
             myself.availableBalance = totalBalance + (amount)
             totalBalance = myself.availableBalance
 
-
     def printTransaction(self):
         print(">>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
         print("Type: " + self.type)

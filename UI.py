@@ -4,7 +4,9 @@ from PIL import Image
 
 from Dashboard import *
 from TransactionsHistory import *
-from Expenses import*
+from Expenses import *
+
+
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()

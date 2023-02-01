@@ -26,7 +26,6 @@ def human_format(num):
 def loadData():
     for row in excel_data.iterrows():
         temp = Transaction.Transaction()
-        print(row)
         if row[1].to_dict()['Debit'] == 'False':
             # its credit
             if row[1].to_dict()['Credit'] != 'False':
@@ -152,11 +151,10 @@ def get_current_month_name():
 
 def totalLoanToBePaid():
     totalLoan = 0
-    print(len(AllTransactions))
     for i in AllTransactions:
         tagslist = i.tags[0].split(",")
         if "loan to be payed" in tagslist:
-            print("foudn loan to be payed in " + i.comments)
+
             totalLoan = totalLoan + i.amount
     return round(totalLoan)
 
@@ -166,7 +164,6 @@ def totalLoanToRecieve():
     for i in AllTransactions:
         tagslist = i.tags[0].split(",")
         if "loan to recieve" in tagslist:
-            print("foudn loan to be recieved in " + i.comments)
             totalLoan = totalLoan + i.amount
     return round(totalLoan)
 
@@ -179,3 +176,7 @@ def get_names_of_all_months():
     all_months_names=list(dict.fromkeys(all_months_names))
     all_months_names = all_months_names[-12:]
     return all_months_names
+
+def get_percentage(part, whole):
+    percentage = 100 * float(part) / float(whole)
+    return percentage/100

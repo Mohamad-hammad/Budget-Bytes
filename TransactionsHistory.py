@@ -5,44 +5,13 @@ from Expenses import*
 root = None
 transaction_history_month = None
 def show_all_transactions():
-    """
-    working canvas code:
-
-    # Create A Canvas
-    my_canvas = tkinter.Canvas(root)
-    my_canvas.grid(row=1,column=0)
-
-    # Add A Scrollbar To The Canvas
-    my_scrollbar = ttk.Scrollbar(root, orient=VERTICAL, command=my_canvas.yview)
-    my_scrollbar.grid(row=1,column=0,sticky=tkinter.E+tkinter.NS )
-
-    # Configure The Canvas
-    my_canvas.configure(yscrollcommand=my_scrollbar.set)
-    my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
-
-    # Create ANOTHER Frame INSIDE the Canvas
-    second_frame = tkinter.Frame(my_canvas)
-
-    # Add that New frame To a Window In The Canvas
-    my_canvas.create_window((0, 0), window=second_frame, anchor="nw")
-
-    for thing in range(100):
-        tkinter.Button(second_frame, text=f'Button {thing} Yo!').grid(row=thing, column=0, pady=10, padx=10)
-
-    my_label = tkinter.Label(second_frame, text="It's Friday Yo!").grid(row=3, column=2)
-    :return:
-    """
 
     all_transactions_frame = customtkinter.CTkFrame(root, corner_radius=0, fg_color="transparent")
     # Create A Canvas
     if customtkinter.get_appearance_mode()=='Light':
-        print("setting it to white")
         bg='#f0ecec'
     else:
         bg = root["bg"]
-    print("root bg is "+root["bg"])
-    print("appearance mode is "+customtkinter.get_appearance_mode())
-
     my_canvas = tkinter.Canvas(all_transactions_frame,bg=bg,bd=0, highlightthickness=0,width=900,height=500)
     my_canvas.grid(row=1, column=0)
 
@@ -153,62 +122,14 @@ def show_all_transactions():
         i = i + 1
     all_transactions_frame.grid(row=1,column=0)
 
-    """
-    Canvas code that stopped working
-    # Create A Canvas
-    my_canvas = tkinter.Canvas(root,bg=root["bg"],bd=0, highlightthickness=0)
-    my_canvas.grid(row=1, column=0)
-    # Add A Scrollbar To The Canvas
-    my_scrollbar = customtkinter.CTkScrollbar(root, orientation="vertical", command=my_canvas.yview)
-    my_scrollbar.grid(row=1,column=0,sticky="ens" )
-
-    my_canvas.configure(yscrollcommand=my_scrollbar.set)
-    my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
-
-    # Create ANOTHER Frame INSIDE the Canvas
-    list_of_transactions_frame = customtkinter.CTkFrame(my_canvas, corner_radius=0, fg_color="transparent")
-    list_of_transactions_frame.grid(row=0, column=0,columnspan=3)
-
-    # Add that New frame To a Window In The Canvas
-    my_canvas.create_window((0, 0), window=list_of_transactions_frame, anchor="nw")
-
-    i=0
-    this_month_transactions = get_current_month_transactions_history()
-    for transaction in this_month_transactions:
-        print(transaction.description)
-        temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
-                                            text=transaction.description,
-                                            compound="left",wraplength=200, justify="left",
-                                            font=customtkinter.CTkFont(size=15, weight="bold"))
-        temp_label.grid(row=i, column=0, padx=20, pady=20,sticky ='nw')
-        i=i+1
-"""
-
-
-    """
-    canvas = FigureCanvasTkAgg(create_expense_bar_chart(), master=current_month_frame)
-    canvas.draw()
-    canvas.get_tk_widget().grid(row=2, column=0, columnspan=1, padx=20, sticky="nw")
-
-
-    list_of_transactions_frame = customtkinter.CTkFrame(my_canvas, corner_radius=0, fg_color="transparent")
-    list_of_transactions_frame.grid(row=0, column=0)
-    temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
-                                                    text="This is ew frame",
-                                                    compound="left",
-                                                    font=customtkinter.CTkFont(size=15, weight="bold"))
-    temp_label.grid(row=0, column=0, padx=20, pady=20)
-    """
 def set_month_event(month):
     global transaction_history_month
     transaction_history_month = month
-    print("month set to "+transaction_history_month)
     show_all_transactions()
 
 
 def get_current_month_transactions_history():
     i = len(AllTransactions) - 1
-    print("i am here to get transactions")
     this_month_transactions = []
     while i >= 0:
         currentMonth = AllTransactions[i].date.split(" ")
@@ -235,9 +156,4 @@ def create_transactions_history_frame(Root):
     month_select_menu = customtkinter.CTkOptionMenu(master=transactions_history_frame, values=get_names_of_all_months(),
                                                     command=set_month_event)
     month_select_menu.grid(row=0, column=0, padx=20, sticky="nw")
-    """navigation_frame_label = customtkinter.CTkLabel(master = root, text="This is third frame and its cominf from sperate file",
-                                                         compound="left",
-                                                         font=customtkinter.CTkFont(size=15, weight="bold"))
-    navigation_frame_label.grid(row=0, column=0, padx=20, pady=20)"""
-
     return transactions_history_frame

@@ -66,7 +66,6 @@ def this_month_total_earning():
     for i in this_month_transactions:
         if i.type == 'Credit':
             total_earning = total_earning + i.amount;
-    print("thsi month total_earning = " + str(total_earning))
     return round(total_earning)
 def this_month_total_expenses():
     this_month_transactions = get_current_month_transactions()
@@ -74,7 +73,7 @@ def this_month_total_expenses():
     for i in this_month_transactions:
         if i.type == 'Debit':
             total_expense = total_expense + i.amount;
-    print("thsi month expenses = "+str(total_expense))
+
     return round(total_expense)
 def you_sepnt_most_on():
     this_month_transactions = get_current_month_transactions()
@@ -132,6 +131,7 @@ def create_current_month_expenses_frame():
 
     # progess bar
     progressbar = customtkinter.CTkProgressBar(master=current_month_frame)
+    progressbar.set(get_percentage(this_month_total_earning(), getMonthlyExpenseLimit()))
     progressbar.grid(row=4, column=0, pady=40, sticky="nw")
 
     # SPENT label
@@ -148,6 +148,7 @@ def create_current_month_expenses_frame():
 
     # progess bar
     progressbar = customtkinter.CTkProgressBar(master=current_month_frame)
+    progressbar.set(get_percentage(this_month_total_expenses(), getMonthlyExpenseLimit()))
     progressbar.grid(row=4, column=0, pady=80, sticky="nw")
 
     # Remaining cashflow amount label
@@ -183,5 +184,4 @@ def create_expenses_frame(Root):
     month_select_menu = customtkinter.CTkOptionMenu(master=expenses_frame, values=get_names_of_all_months(),
                                                        command=select_month_event)
     month_select_menu.grid(row=0, column=0, padx=20, sticky="nw")
-    print("expense frame bg is "+root["bg"])
     return expenses_frame

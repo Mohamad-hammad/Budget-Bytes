@@ -21,7 +21,6 @@ class Transaction:
         myself.acc = acc
         myself.bank = bank
         myself.tags = tags.split(",")
-        print("amoutn is " + str(amount))
         if date != None:
             myself.date = date
         else:
@@ -29,11 +28,11 @@ class Transaction:
         if type == "Debit":
             myself.availableBalance = totalBalance - amount
             totalBalance = myself.availableBalance
-            # print("total balance after sub is "+str(totalBalance))
+
         else:
             myself.availableBalance = totalBalance + (amount)
             totalBalance = myself.availableBalance
-            # print("total balance after sum is "+str(totalBalance))
+
 
     def printTransaction(self):
         print(">>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")

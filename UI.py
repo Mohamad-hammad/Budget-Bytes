@@ -17,21 +17,9 @@ class App(customtkinter.CTk):
 
         # load images with light and dark mode image
         image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "images")
-        self.logo_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "CustomTkinter_logo_single.png")),
-                                                 size=(26, 26))
-        self.large_test_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "large_test_image.png")),
-                                                       size=(500, 150))
-        self.image_icon_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "image_icon_light.png")),
-                                                       size=(20, 20))
         self.home_image = customtkinter.CTkImage(light_image=Image.open(os.path.join(image_path, "home_dark.png")),
                                                  dark_image=Image.open(os.path.join(image_path, "home_light.png")),
                                                  size=(20, 20))
-        self.chat_image = customtkinter.CTkImage(light_image=Image.open(os.path.join(image_path, "chat_dark.png")),
-                                                 dark_image=Image.open(os.path.join(image_path, "chat_light.png")),
-                                                 size=(20, 20))
-        self.add_user_image = customtkinter.CTkImage(
-            light_image=Image.open(os.path.join(image_path, "add_user_dark.png")),
-            dark_image=Image.open(os.path.join(image_path, "add_user_light.png")), size=(20, 20))
         self.dollar_sign = customtkinter.CTkImage(
             light_image=Image.open(os.path.join(image_path, "dollar.png")),
             dark_image=Image.open(os.path.join(image_path, "dollar.png")), size=(20, 20))
@@ -41,6 +29,9 @@ class App(customtkinter.CTk):
         self.all_accounts = customtkinter.CTkImage(
             light_image=Image.open(os.path.join(image_path, "all_accounts.png")),
             dark_image=Image.open(os.path.join(image_path, "all_accounts.png")), size=(20, 20))
+        self.all_transactions = customtkinter.CTkImage(
+            light_image=Image.open(os.path.join(image_path, "all transaction light.png")),
+            dark_image=Image.open(os.path.join(image_path, "all transaction dark.png")), size=(20, 20))
 
         # create navigation frame
         self.navigation_frame = customtkinter.CTkFrame(self, corner_radius=0)
@@ -72,7 +63,7 @@ class App(customtkinter.CTk):
                                                       border_spacing=10, text="All Transactions",
                                                       fg_color="transparent", text_color=("gray10", "gray90"),
                                                       hover_color=("gray70", "gray30"),
-                                                      image=self.all_accounts, anchor="w",
+                                                      image=self.all_transactions, anchor="w",
                                                       command=self.frame_3_button_event)
         self.frame_3_button.grid(row=3, column=0, sticky="ew")
 
@@ -83,26 +74,12 @@ class App(customtkinter.CTk):
 
         # create home frame
         self.home_frame = createDashboardFrame(self)
-        """
-        self.home_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
-        self.home_frame.grid_columnconfigure(0, weight=1)
-
-        self.home_frame_large_image_label = customtkinter.CTkLabel(self.home_frame, text="thisis home")
-        self.home_frame_large_image_label.grid(row=0, column=0, padx=20, pady=10)
-        """
-
         # create second frame
         self.second_frame = create_expenses_frame(self)
 
         # create third frame
         self.third_frame = create_transactions_history_frame(self)
-        """
-        self.third_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
-        self.navigation_frame_label = customtkinter.CTkLabel(self.third_frame, text="This is third frame",
-                                                             compound="left",
-                                                             font=customtkinter.CTkFont(size=15, weight="bold"))
-        self.navigation_frame_label.grid(row=0, column=0, padx=20, pady=20)
-        """
+
         # select default frame
         self.select_frame_by_name("home")
 
@@ -137,7 +114,6 @@ class App(customtkinter.CTk):
 
     def change_appearance_mode_event(self, new_appearance_mode):
         customtkinter.set_appearance_mode(new_appearance_mode)
-        print(customtkinter.get_appearance_mode())
 
 
 if __name__ == "__main__":

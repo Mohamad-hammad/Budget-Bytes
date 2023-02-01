@@ -119,6 +119,7 @@ def createDashboardFrame(root):
 
     # progess bar
     progressbar = customtkinter.CTkProgressBar(master=home_frame)
+    progressbar.set(get_percentage(currentMonthEarning(),getMonthlyExpenseLimit()))
     progressbar.grid(row=4, column=1, pady=40, sticky="nw")
 
     # SPENT label
@@ -134,6 +135,7 @@ def createDashboardFrame(root):
 
     # progess bar
     progressbar = customtkinter.CTkProgressBar(master=home_frame)
+    progressbar.set(get_percentage(currentMonthExpenses(), getMonthlyExpenseLimit()))
     progressbar.grid(row=4, column=1, pady=80, sticky="nw")
 
     # Remaining cashflow amount label

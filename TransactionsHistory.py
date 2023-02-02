@@ -78,6 +78,7 @@ def show_all_transactions():
                                         font=customtkinter.CTkFont(size=15, weight="bold"))
     temp_label.grid(row=i, column=6, padx=20, pady=20, sticky='nw')
     i = 1
+    #print transaction details in table
     for transaction in this_month_transactions:
         # transaction details
         temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
@@ -99,7 +100,7 @@ def show_all_transactions():
         temp_label.grid(row=i, column=2, padx=20, pady=20, sticky='nw')
 
         temp_label = customtkinter.CTkLabel(master=list_of_transactions_frame,
-                                            text=transaction.amount,
+                                            text=f"{transaction.amount:,}",
                                             compound="left", wraplength=100, justify="left",
                                             font=customtkinter.CTkFont(size=15, weight="bold"))
         temp_label.grid(row=i, column=3, padx=20, pady=20, sticky='nw')

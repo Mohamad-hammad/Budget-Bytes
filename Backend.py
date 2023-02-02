@@ -13,7 +13,6 @@ excel_data.fillna("False", inplace=True)
 AllTransactions = []
 monthlyExpenseLimit = 20000
 
-
 def human_format(num):
     num = float('{:.3g}'.format(num))
     magnitude = 0
@@ -64,10 +63,10 @@ def drawBarChart():
     for i in AllTransactions:
         currentMonth = i.date.split(" ")
 
-        if (not allMonths or allMonths[len(allMonths) - 1] != currentMonth[1]):
+        if not allMonths or allMonths[len(allMonths) - 1] != currentMonth[1]:
             allMonths.append(currentMonth[1])
             totalAmountPerMonth.append(0)
-        if (i.type == 'Credit'):
+        if i.type == 'Credit':
             totalAmountPerMonth[len(totalAmountPerMonth) - 1] = totalAmountPerMonth[
                                                                     len(totalAmountPerMonth) - 1] + i.amount;
         else:
@@ -96,7 +95,6 @@ def drawBarChart():
 
     ind = numpy.arange(8)  # the x locations for the groups
     width = .5
-
     rects1 = ax.bar(allMonths, data, width, label=allMonths, color=colors)
     for i in range(len(allMonths)):
         ax.text(i, data[i], f"{round(data[i]):,}", ha='center', weight='bold')

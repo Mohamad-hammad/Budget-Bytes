@@ -28,13 +28,13 @@ def createDashboardFrame(root):
     label_balance.grid(row=0, column=0, padx=20, sticky="nw")
 
     # total balance
-    if (round(AllTransactions[len(AllTransactions) - 1].availableBalance) < 0):
+    if round(AllTransactions[len(AllTransactions) - 1].availableBalance) < 0:
         color = "red"
     else:
         color = "green"
     font_totalBalance = customtkinter.CTkFont(family="Poppins Bold", size=25)
-    label_totalBalance = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(
-        round(AllTransactions[len(AllTransactions) - 1].availableBalance)), text_color=color,
+    label_totalBalance = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(f"{round(AllTransactions[len(AllTransactions) - 1].availableBalance):,}"
+        ), text_color=color,
                                                 font=font_totalBalance)
     label_totalBalance.grid(row=0, column=0, padx=20, pady=20, sticky="nw")
 
@@ -55,7 +55,7 @@ def createDashboardFrame(root):
 
     # total loabn
     font_totalLoan = customtkinter.CTkFont(family="Poppins Bold", size=20)
-    label_totalLoan = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(totalLoanToBePaid()),
+    label_totalLoan = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(f"{totalLoanToBePaid():,}"),
                                              font=font_totalLoan)
     label_totalLoan.grid(row=4, column=0, padx=20, pady=20, sticky="nw")
 
@@ -66,7 +66,7 @@ def createDashboardFrame(root):
 
     # total loabn
     font_totalLoan = customtkinter.CTkFont(family="Poppins Bold", size=20)
-    label_totalLoan = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(totalLoanToRecieve()),
+    label_totalLoan = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(f"{totalLoanToRecieve():,}"),
                                              font=font_totalLoan)
     label_totalLoan.grid(row=4, column=0, padx=200, pady=20, sticky="nw")
 
@@ -78,7 +78,7 @@ def createDashboardFrame(root):
 
     # mothly expense limit amount label
     font_expenseLimitAmount = customtkinter.CTkFont(family="Poppins Bold", size=20)
-    label_expenseLimitAmount = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(getMonthlyExpenseLimit()),
+    label_expenseLimitAmount = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(f"{getMonthlyExpenseLimit():,}"),
                                                       anchor="w", font=font_expenseLimitAmount)
     label_expenseLimitAmount.grid(row=2, column=1, pady=20, sticky="nw")
 
@@ -95,7 +95,7 @@ def createDashboardFrame(root):
     else:
         color = "green"
     label_thisMonthLimitAmoun = customtkinter.CTkLabel(master=home_frame, text_color=color,
-                                                       text="Rs." + str(currentMonthExpenses()), anchor="w",
+                                                       text="Rs." + str(f"{currentMonthExpenses():,}"), anchor="w",
                                                        font=font_thisMonthLimitAmount)
     label_thisMonthLimitAmoun.grid(row=2, column=1, pady=80, sticky="nw")
 
@@ -113,7 +113,7 @@ def createDashboardFrame(root):
 
     # Earned amount label
     font_amountEarned = customtkinter.CTkFont(family="Poppins Bold", size=10)
-    label_amountEarned = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(currentMonthEarning()), anchor="w",
+    label_amountEarned = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(f"{currentMonthEarning():,}"), anchor="w",
                                                 font=font_amountEarned)
     label_amountEarned.grid(row=4, column=1, padx=150, pady=20, sticky="nw")
 
@@ -123,13 +123,13 @@ def createDashboardFrame(root):
     progressbar.grid(row=4, column=1, pady=40, sticky="nw")
 
     # SPENT label
-    font_spentLabel = customtkinter.CTkFont(family="Poppins Regular", size=10)
-    label_spentLabel = customtkinter.CTkLabel(master=home_frame, text="SPENT", anchor="w", font=font_spentLabel)
-    label_spentLabel.grid(row=4, column=1, pady=60, sticky="nw")
+    font_spent_label = customtkinter.CTkFont(family="Poppins Regular", size=10)
+    label_spent_Label = customtkinter.CTkLabel(master=home_frame, text="SPENT", anchor="w", font=font_spent_label)
+    label_spent_Label.grid(row=4, column=1, pady=60, sticky="nw")
 
     # SPENT amount label
     font_spentAmount = customtkinter.CTkFont(family="Poppins Bold", size=10)
-    label_spentAmount = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(currentMonthExpenses()), anchor="w",
+    label_spentAmount = customtkinter.CTkLabel(master=home_frame, text="Rs." + str(f"{currentMonthExpenses():,}"), anchor="w",
                                                font=font_spentAmount)
     label_spentAmount.grid(row=4, column=1, padx=150, pady=60, sticky="nw")
 
@@ -145,11 +145,11 @@ def createDashboardFrame(root):
     else:
         color = "green"
     label_remainingAmount = customtkinter.CTkLabel(master=home_frame, text_color=color,
-                                                   text="Rs." + str(currentMonthEarning() - currentMonthExpenses()),
+                                                   text="Rs." + str(f"{currentMonthEarning() - currentMonthExpenses():,}"),
                                                    anchor="w", font=font_remainingAmount)
     label_remainingAmount.grid(row=4, column=1, padx=210, pady=45, sticky="nw")
 
-    # Remaning label
+    # Remaining label
     font_remainingLabel = customtkinter.CTkFont(family="Poppins Regular", size=10)
     label_remaining = customtkinter.CTkLabel(master=home_frame, text="REMAINING", anchor="w", font=font_remainingLabel)
     label_remaining.grid(row=4, column=1, pady=70, padx=210, sticky="nw")

@@ -21,7 +21,7 @@ class Transaction:
         myself.acc = acc
         myself.bank = bank
         myself.tags = tags.split(",")
-        if date != None:
+        if date is not None:
             myself.date = date
         else:
             myself.date = date.today().strftime("%d/%m/%Y")
